@@ -7,6 +7,7 @@ const Home = () => {
   const [data, setData] = useState({});
   useEffect(() => {
     firebaseDb.child("ranking").on("value", (snapshot) => {
+
       if (snapshot.val() !== null) {
         setData({
           ...snapshot.val(),
@@ -21,25 +22,27 @@ const Home = () => {
     };
   }, []);
 
+
+
   return (
     <div className="home">
       <table className="styled-table">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Pontuação</th>
             <th>Nome</th>
+            <th>Pontuação</th>
+            <th>Id</th>
           </tr>
         </thead>
         <tbody>
-          {Object.keys(data).map((id) => {
+          {Object.keys(data).map((Nome) => {
 
             return (
-
-              <tr key={id}>
-                <th scope="row">{id}</th>
-                    <td>{data[id].Pontuacao}</td>
-                    <td>{data[id].Nome}</td>
+              
+              <tr key={Nome}>
+                <th scope="row">{Nome}</th>
+                    <td>{data[Nome].Pontuacao}</td>
+                    <td>{data[Nome].id}</td>
               </tr>
             );
           })}
